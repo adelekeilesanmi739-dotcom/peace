@@ -6,13 +6,6 @@ function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("active");
 }
 
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    document.getElementById("formMessage").innerHTML =
-        "Thank you! Your message has been received.";
-});
-
 function goToTop() {
     window.scrollTo({
         top: 0,
@@ -105,28 +98,26 @@ form.addEventListener("submit", async (e) => {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const message = document.getElementById("message").value;
+    const formMessage = document.getElementById("formMessage");
 
-    const response = await fetch("http://localhost:3000/contact", {
-        method: "POST",
+    formMessage.textContent = "Sending...";
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+    try {
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, message })
+        });
 
-        body: JSON.stringify({
-            name,
-            email,
-            message
-        })
-    });
+        const data = await response.json();
+        formMessage.textContent = data.message;
 
-    const data = await response.json();
-
-    alert(data.message);
+        if (response.ok) {
+            form.reset();
+        }
+    } catch (error) {
+        formMessage.textContent = "Something went wrong. Please try again later.";
+    }
 });
-
-fetch("http://localhost:3000")
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-    });
