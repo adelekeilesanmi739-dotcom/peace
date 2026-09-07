@@ -14,10 +14,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       // Resend's free tier requires this exact sender address
       // until you verify your own domain with them.
       from: "Portfolio Contact Form <onboarding@resend.dev>",
+
+      // CHANGE THIS to the email address you want to receive messages at:
       to: "adelekeilesanmi739@gmail.com",
 
       subject: `New message from ${name}`,
@@ -25,9 +27,15 @@ export default async function handler(req, res) {
       text: `From: ${name} (${email})\n\n${message}`,
     });
 
+    if (error) {
+      console.error("Resend returned an error:", error);
+      return res.status(500).json({ message: "Something went wrong. Please try again later." });
+    }
+
+    console.log("Email sent successfully:", data);
     return res.status(200).json({ message: "Thank you! Your message has been sent." });
   } catch (error) {
-    console.error(error);
+    console.error("Unexpected error:", error);
     return res.status(500).json({ message: "Something went wrong. Please try again later." });
   }
 }
