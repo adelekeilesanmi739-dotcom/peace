@@ -372,6 +372,17 @@ footer p {
    MOBILE RESPONSIVENESS
 ========================= */
 
+.menu-button {
+    display: none;
+    background: transparent;
+    color: white;
+    font-size: 30px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
 @media (max-width: 600px) {
 
     body {
@@ -473,13 +484,13 @@ max-width:250px;
 }
 
 .skill-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 2,1fr;
 }
 
 /* PROJECTS */
 
 .projects-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1,2fr;
 }
 
 .project-card {
@@ -488,6 +499,24 @@ max-width:250px;
 
 .project-buttons {
     flex-wrap: wrap;
+}
+
+
+.back-home {
+    display: inline-block;
+    background-color: darkblue;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-home:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
 }
 
 /*contact*/
@@ -781,7 +810,7 @@ nav {
 
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     max-width: 1000px;
     margin: 40px auto 0;
@@ -863,8 +892,24 @@ nav {
     transition: 0.3s;
 }
 
-
 .project-button:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+}
+
+.back-home {
+    display: inline-block;
+    background-color: darkblue;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-home:hover {
     transform: translateY(-3px);
     opacity: 0.85;
 }
@@ -914,31 +959,10 @@ section {
     }
 }
 
-/* =========================
-   MOBILE MENU
-========================= */
-
 .nav-logo {
     color: white;
     font-size: 22px;
     font-weight: bold;
-}
-
-.menu-button {
-    display: none;
-    background: transparent;
-    color: white;
-    font-size: 30px;
-    padding: 5px 10px;
-    border:none;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 30px;
 }
 
 /* =========================
@@ -972,4 +996,3 @@ section {
     }
 
 }
-
