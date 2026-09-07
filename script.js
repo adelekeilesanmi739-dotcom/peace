@@ -1,12 +1,18 @@
 function sayHello() {
     alert("Hello! Thanks for visiting my website.");
 }
+
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
 document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     document.getElementById("formMessage").innerHTML =
         "Thank you! Your message has been received.";
 });
+
 function goToTop() {
     window.scrollTo({
         top: 0,
@@ -30,14 +36,6 @@ backToTop.addEventListener("click", function() {
         behavior: "smooth"
     });
 });
-
-function toggleMenu() {
-
-    const navLinks = document.getElementById("navLinks");
-
-    navLinks.classList.toggle("active");
-
-}
 
 const words = [
     "Web Developer",
@@ -97,3 +95,38 @@ function typeEffect() {
 }
 
 typeEffect();
+
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const response = await fetch("http://localhost:3000/contact", {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            name,
+            email,
+            message
+        })
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+});
+
+fetch("http://localhost:3000")
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    });
